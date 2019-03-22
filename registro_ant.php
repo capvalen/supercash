@@ -5,7 +5,7 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 <html lang="es">
 
 <head>
-	<title>Registro: PeruCash</title>
+	<title>Registro: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -30,7 +30,7 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 			<!-- Empieza a meter contenido 2 -->
 			<h2 class="purple-text text-lighten-1">Registro de Clientes, Productos y Compras <small><?php print $_COOKIE["ckAtiende"]; ?></small></h2><hr>
 			<div class="contenedorBienvenida">
-				<h4>Bienvenido a PeruCash, para empezar selecciona que tipo de producto deseas registrar</h4>
+				<h4>Bienvenido a SuperCash, para empezar selecciona que tipo de producto deseas registrar</h4>
 				<div class="row"><br>
 					<div class="col-sm-6 text-center">
 						<button class="btn btn-morado btn-outline btnMasterEntrada" id="btnRemateMaster"><i class="icofont icofont-deal"></i> <br>Empeño</button>

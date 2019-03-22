@@ -5,7 +5,7 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 <html lang="es">
 
 <head>
-	<title>Registro: PeruCash</title>
+	<title>Registro: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -72,18 +72,18 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 			<span class="hidden queMichiEs"></span>
 			<div class="contenedorDatosCliente hidden">
 					<div class="row">
-					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> D.N.I.: </label><input type="text" class="form-control" id="txtDni" placeholder="Número del documento de identidad" maxlength="8" size="8" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
-					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Apellidos:</label><input type="text" class="form-control mayuscula" id="txtApellidos" placeholder="Apellidos completos" autocomplete="off"></div>
-					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Nombres:</label><input type="text" class="form-control mayuscula" id="txtNombres" placeholder="Nombres completos" autocomplete="off"></div>
+					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> D.N.I.: </label><input type="text" class="form-control" id="txtDni" placeholder="Número del documento de identidad" maxlength="8" size="8" autocomplete="nope" oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
+					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Apellidos:</label><input type="text" class="form-control mayuscula" id="txtApellidos" placeholder="Apellidos completos" autocomplete="nope"></div>
+					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Nombres:</label><input type="text" class="form-control mayuscula" id="txtNombres" placeholder="Nombres completos" autocomplete="nope"></div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6"><label>Dirección domiciliaria:</label><input type="text" class="form-control mayuscula" id="txtDireccion" placeholder="Dirección del cliente" autocomplete="off"></div>
-					<div class="col-sm-3"><label>Correo electrónico:</label><input type="text" class="form-control" id="txtCorreo" placeholder="Correo electrónico del cliente" autocomplete="off"></div>
+					<div class="col-sm-6"><label>Dirección domiciliaria:</label><input type="text" class="form-control mayuscula" id="txtDireccion" placeholder="Dirección del cliente" autocomplete="nope"></div>
+					<div class="col-sm-3"><label>Correo electrónico:</label><input type="text" class="form-control" id="txtCorreo" placeholder="Correo electrónico del cliente" autocomplete="nope"></div>
 					
 				</div>
 				<div class="row">
-					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Celular:</label><input type="text" class="form-control" id="txtCelular" placeholder="Número de celular" autocomplete="off"></div>
-					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Otro número de referencia:</label><input type="text" class="form-control" id="txtFono" placeholder="Número de Tlf. o Cel. extra" autocomplete="off"></div>
+					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Celular:</label><input type="text" class="form-control" id="txtCelular" placeholder="Número de celular" autocomplete="nope"></div>
+					<div class="col-sm-6 col-md-3"><label><span class="txtObligatorio">*</span> Otro número de referencia:</label><input type="text" class="form-control" id="txtFono" placeholder="Número de Tlf. o Cel. extra" autocomplete="nope"></div>
 				</div>
 
 				
@@ -223,25 +223,25 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 		<div class="modal-body">
 			<div class="container-fluid">
 			<div class="row"> <span class="sr-only" id="iddeLi">-1</span>
-				<div class="col-xs-8"><label for="">Tipo de producto <span class="txtObligatorio">*</span></label> 
+				<div class="col-xs-8 hidden"><label for="">Tipo de producto <span class="txtObligatorio">*</span></label> 
 					<div  id="divSelectProductoListado">
 						<select class="selectpicker mayuscula" id="sltProductoListado" title="Tipo de producto..."  data-width="100%" data-live-search="true" data-size="15">
 							<?php require 'php/listarProductosTipos.php'; ?>
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-4"><label for="">Cantidad <span class="txtObligatorio">*</span></label> <input type="number" class="form-control text-center" id="txtQProduc" autocomplete="off"></div>
+				<div class="col-xs-4 hidden"><label for="">Cantidad <span class="txtObligatorio">*</span></label> <input type="number" class="form-control text-center" id="txtQProduc" autocomplete="off"></div>
 			</div>
 			<div class="row ">
-				<div class="col-xs-8"><label for="">Marca, Modelo y/o Características <span class="txtObligatorio">*</span></label> <input type="text" class="form-control mayuscula" id="txtNameProduc" placeholder="Sea específico con las características" autocomplete="off"></div>
+				<div class="col-xs-8"><label for=""><span class="txtObligatorio">*</span> Marca, Modelo y/o Características</label> <input type="text" class="form-control mayuscula" id="txtNameProduc" placeholder="Sea específico con las características" autocomplete="off"></div>
 				<div class="col-xs-4 hidden" id="divParaVehiculos">
-					<label for="">Placa <span class="txtObligatorio">*</span></label> <input type="text" class="form-control mayuscula soloLetras" id="txtPlacaProduc" placeholder="" autocomplete="off" style="text-transform:uppercase;">
+					<label for=""><span class="txtObligatorio">*</span> Placa</label> <input type="text" class="form-control mayuscula soloLetras" id="txtPlacaProduc" placeholder="" autocomplete="off" style="text-transform:uppercase;">
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4"><label for="">Capital total S/ <span class="txtObligatorio">*</span></label> <input type="number" class="form-control text-center txtNumeroDecimal" id="txtCapitalProduc" value="0.00" autocomplete="off"></div>
-				<div class="col-xs-4"><label for="">Interés Semanal % <span class="txtObligatorio">*</span></label> <input type="number" class="form-control text-center" id="txtInteresProduc" value="4" autocomplete="off"></div>
-				<div class="col-xs-4"><label for="">Fecha de ingreso <span class="txtObligatorio">*</span></label>
+				<div class="col-xs-4"><label for=""><span class="txtObligatorio">*</span> Capital total S/</label> <input type="number" class="form-control text-center txtNumeroDecimal" id="txtCapitalProduc" value="0.00" autocomplete="off"></div>
+				<div class="col-xs-4"><label for=""><span class="txtObligatorio">*</span> Interés Semanal %</label> <input type="number" class="form-control text-center" id="txtInteresProduc" value="5" autocomplete="off"></div>
+				<div class="col-xs-4"><label for=""><span class="txtObligatorio">*</span> Fecha de ingreso</label>
 					<div class="sandbox-container"><input id="dtpFechaInicio" type="text" class="form-control text-center" autocomplete="off"></div>	
 				</div>
 			</div>
@@ -272,7 +272,7 @@ $hayCaja= require_once("php/comprobarCajaHoy.php"); ?>
 
 <?php if ( isset($_COOKIE['ckidUsuario']) ){?>
 <script>
-$.interesGlobal=4;
+$.interesGlobal=5;
 datosUsuario();
 
 $(document).ready(function(){
@@ -298,7 +298,8 @@ $('#btnAddNewProd').click(function () {
 	$('#dtpFechaInicio').val(moment().format('DD/MM/YYYY'));
 	$('#txtObservacionProduc').val('')
 	$('.modal-nuevoProductoLista .divError').addClass('hidden');
-	$('#sltProductoListado').selectpicker('val','');
+	//$('#sltProductoListado').selectpicker('val','');
+	$('#sltProductoListado').selectpicker('val', 'Otro');
 	$('.modal-nuevoProductoLista').modal('show');
 });
 $('#btnAgregarItem').click(function () {
@@ -332,7 +333,7 @@ $('#btnAgregarItem').click(function () {
 	else{
 		$('#conjuntoElementos').append(`<li class="list-group-item">
 				<div class="row rowProduct">
-					<div class="col-xs-8 text-left"> <p><span class="icoMedia"><i class="icofont icofont-cube"></i></span> <span class="spanCantidadv3">${cantItem}</span><span class="spanUnd"> und. </span><span class="mayuscula">${tipoItem}: <span class="spanNomProductov3">${nomItem}</span> <span class="spanPlacaVehiculo " style="text-transform:uppercase">${itemPlaca}</span></span> <br><small class="mayuscula  tipProducto"><span class="spanTipov3ID hidden">${tipoItemID}</span> <span class="spanTipoStrv3 sr-only">${tipoItemStr}</span> <span class="spanObservacionv3">${observaItem}</span></small> </p>
+					<div class="col-xs-8 text-left"> <p><span class="icoMedia"><i class="icofont icofont-cube"></i></span> <span class="spanCantidadv3">${cantItem}</span><span class="spanUnd"> und. </span><span class="mayuscula"><span class="spanNomProductov3">${nomItem}</span> <span class="spanPlacaVehiculo " style="text-transform:uppercase">${itemPlaca}</span></span> <br><small class="mayuscula  tipProducto"><span class="spanTipov3ID hidden">${tipoItemID}</span> <span class="spanTipoStrv3 sr-only">${tipoItemStr}</span> <span class="spanObservacionv3">${observaItem}</span></small> </p>
 					<span class="sr-only spanfechaIngresov3">${fechaItem}</span>  </div>
 					<div class="col-xs-2 divMonto" >S/ <span class="spanPrecioEmpv3">${capiItem}</span></div>
 					<div class="col-xs-2 divMonto pull-right"><span class="spanInteresv3">${interesItem}</span>% </div>
@@ -345,6 +346,7 @@ $('#btnAgregarItem').click(function () {
 
 });
 $('.colNewProduct').click(function () {
+	
 	$('.modal-nuevoProductoLista #btnActualizarItem').addClass('hidden');
 	$('.modal-nuevoProductoLista #btnAgregarItem').removeClass('hidden');
 	$('#txtPlacaProduc').val('').parent().addClass('hidden');
@@ -420,7 +422,7 @@ $('#btnActualizarItem').click(function () {
 		$('#conjuntoElementos li').eq(index).remove();
 		$('#conjuntoElementos').append(`<li class="list-group-item animated fadeIn">
 				 <div class="row rowProduct">
-					  <div class="col-xs-8 text-left"> <p><span class="icoMedia"><i class="icofont icofont-cube"></i></span> <span class="spanCantidadv3">${cantItem}</span> und. <span class="mayuscula">${tipoItem}: <span class="spanNomProductov3">${nomItem}</span> <span class="spanPlacaVehiculo mayuscula" style="text-transform:uppercase">${itemPlaca}</span></span> <br><small class="mayuscula  tipProducto"><span class="spanTipov3ID hidden">${tipoItemID}</span> <span class="spanTipoStrv3 sr-only">${tipoItemStr}</span> <span class="spanObservacionv3">${observaItem}</span></small> </p>
+					  <div class="col-xs-8 text-left"> <p><span class="icoMedia"><i class="icofont icofont-cube"></i></span> <span class="spanCantidadv3">${cantItem}</span> und. <span class="mayuscula"> <span class="spanNomProductov3">${nomItem}</span> <span class="spanPlacaVehiculo mayuscula" style="text-transform:uppercase">${itemPlaca}</span></span> <br><small class="mayuscula  tipProducto"><span class="spanTipov3ID hidden">${tipoItemID}</span> <span class="spanTipoStrv3 sr-only">${tipoItemStr}</span> <span class="spanObservacionv3">${observaItem}</span></small> </p>
 					  <span class="sr-only spanfechaIngresov3">${fechaItem}</span> </div>
 					  <div class="col-xs-2 divMonto" >S/ <span class="spanPrecioEmpv3">${capiItem}</span></div>
 					  <div class="col-xs-2 divMonto pull-right"><span class="spanInteresv3">${interesItem}</span>% </div></div>

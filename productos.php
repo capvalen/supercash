@@ -13,7 +13,7 @@ if( isset($_GET['idProducto'])){
 	$esCompra=$resCompra[0];
 
 	if($esCompra =='0'){
-		$sql = mysqli_query($conection,"select p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion
+		$sql = mysqli_query($conection,"select p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion, tp.idTipoProceso
 		FROM producto p inner join Cliente c on c.idCliente=p.idCliente inner join prestamo_producto pre on pre.idProducto=p.idProducto inner join tipoProceso tp on tp.idTipoProceso=pre.presidTipoProceso
 		left join prestamo pe on pe.idPrestamo = pre.idPrestamo
 		inner join usuario u on u.idUsuario=p.idUsuario
@@ -21,7 +21,7 @@ if( isset($_GET['idProducto'])){
 		WHERE p.idProducto=".$_GET['idProducto'].";");
 		$rowProducto = mysqli_fetch_array($sql, MYSQLI_ASSOC);
 	}else{//Cuando es una compra
-		$sql = mysqli_query($conection,"select p.*, tp.tipoDescripcion, tp.tipColorMaterial, u.usuNombres, tpr.tipopDescripcion 
+		$sql = mysqli_query($conection,"select p.*, tp.tipoDescripcion, tp.tipColorMaterial, u.usuNombres, tpr.tipopDescripcion , tp.idTipoProceso
 		FROM producto p inner join tipoProceso tp on tp.idTipoProceso=p.prodQueEstado
 		inner join usuario u on u.idUsuario=p.idUsuario
 		inner join tipoProducto tpr on tpr.idTipoProducto = p.idTipoProducto
@@ -46,7 +46,7 @@ $cochera=0;
 ?>
 
 <head>
-	<title>Productos: PeruCash</title>
+	<title>Productos: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -264,63 +264,32 @@ $cochera=0;
 				//fin de if de fallse
 				}else{
 
-				if( ($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 || $_COOKIE['ckPower']==5) && ($limite>=37) && $esCompra=0 ){ ?>
-				<p style="margin-top: 10px;"><strong>Generar ticket:</strong></p>
-				<button class="btn btn-morado btn-lg btn-block btn-outline"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de rematar</button>
-
-			<?php } ?>
-
-			<?php if($esCompra==1 && $rowProducto['prodActivo']==1 && ($_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==2 || $_COOKIE['ckPower']==5) ){?>
-				<p style="margin-top: 10px;"><strong>Generar ticket:</strong></p>
-				<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketVenta" ><i class="icofont icofont-people"></i> Ticket de venta</button>
-			<?php }
 				if( $_COOKIE['ckPower']==1 || $_COOKIE['ckPower']==8 || $_COOKIE['ckPower']==4 ){ //zona de pago especial ?>
-					<button class="btn btn-infocat btn-outline btn-block btn-lg " id="btnPagoAutomatico">Automático</button>
+					<button class="btn btn-infocat btn-outline btn-block btn-lg hidden" id="btnPagoAutomatico">Automático</button>
 
 					<p style="margin-top: 10px;" ><strong>Pago especial</strong></p>
 					<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketMaestro"><i class="icofont icofont-mathematical-alt-1"></i> Insertar pago maestro</button>
 				<?php }
-				if($esCompra==0 && $rowProducto['prodActivo']==1 ){
+				/* if($esCompra==0 && $rowProducto['prodActivo']==1 ){
 				
 					if( $limite >= 0 && $limite <= 35 ){ //zona de créditos ?>
 						<p style="margin-top: 10px;" ><strong>Zona pago de intereses</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de intereses</button>
+						<button class="btn btn-morado btn-lg btn-block btn-outline hidden" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de intereses</button>
 					<?php }
 					if( $limite == 36 ){ //zona de prórroga y zona de precio administrativo  && $limite <= 36  ?>
 						<p style="margin-top: 10px;" ><strong>Zona prórroga</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
+						<button class="btn btn-morado btn-lg btn-block btn-outline hidden" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
 						<p style="margin-top: 10px;"><strong>Generar ticket:</strong></p>
 				<button class="btn btn-morado btn-lg btn-block btn-outline"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de rematar</button>
 					<?php }
 					if( $limite >= 37 ){ //zona venta de remate  && $limite <= 49 ?>
 					<p style="margin-top: 10px;" ><strong>Zona prórroga</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
+						<button class="btn btn-morado btn-lg btn-block btn-outline hidden" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
 						<!-- <p style="margin-top: 10px;" ><strong>Zona precio administrativo</strong> Vender a 250%</p>
 						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicket"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de precio admin.</button> -->
 					<?php }
-					/* if( $limite >= 50 && $limite <= 59 ){ //zona  venta de remate ?>
-					<p style="margin-top: 10px;" ><strong>Zona prórroga</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
-						<p style="margin-top: 10px;" ><strong>Zona remate</strong> Vender a 200%</p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicket"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de remate</button>
-					<?php }
-					if( $limite >= 60 && $limite <= 69 ){ //zona  venta de remate ?>
-					<p style="margin-top: 10px;" ><strong>Zona prórroga</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
-						<p style="margin-top: 10px;" ><strong>Zona remate</strong> Vender a 150%</p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicket"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de remate</button>
-					<?php }
-					if( $limite >= 70 && $limite <= 79 ){ //zona  venta de remate ?>
-					<p style="margin-top: 10px;" ><strong>Zona prórroga</strong></p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicketIntereses"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de prórroga</button>
-						<p style="margin-top: 10px;" ><strong>Zona remate</strong> Vender a 80%</p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicket"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de remate</button>
-					<?php }
-					if( $limite >= 80 ){ //zona de venta de remate ?>
-						<p style="margin-top: 10px;" ><strong>Zona remate administrativo</strong> Proponer una solución. Hueso</p>
-						<button class="btn btn-morado btn-lg btn-block btn-outline" id="btnLlamarTicket"><i class="icofont icofont-mathematical-alt-1"></i> Ticket de remate admin.</button>
-					<?php } */
-					}
+				
+					} */
 				}//fin de if de requireonce comproibar cajahoy
 			}
 		
@@ -1019,15 +988,11 @@ $(document).ready(function(){
 		//$(dato).attr('data-sort');//
 	});
 
-$('#dtpFechaPago').val('<?php
-	$date = new DateTime($_GET['fecha']);
-	echo  $date->format('d/m/Y h:mm a');
-?>');
 $('#txtFechaCongelar').val(moment().format('YYYY-MM-DD'));
 $('#dtpFechaPago').bootstrapMaterialDatePicker({
 	format: 'DD/MM/YYYY h:m a',
 	lang: 'es',
-	time: true,
+	shortTime : true,
 	weekStart: 1,
 	cancelText : 'Cerrar',
 	nowButton : true,
@@ -1138,7 +1103,7 @@ $('.btnImprimirTicket').click(function () {
 	var queDueno = <?php if($esCompra==1){ echo '`Compra directa`';}else { ?> $('.spanDueno').text() <?php } ?>;
 	var queFecha = moment($(this).parent().parent().find('.spanFechaFormat').text(), 'dddd, DD [de] MMMM [de] YYYY h:mm a').format('dddd, DD/MMMM/YYYY h:mm a');
 	if(queUser=='' || queUser==' '){
-		queUser='Sistema PeruCash';
+		queUser='Sistema SuperCash';
 	}
 
 	switch( $(this).attr('data-boton') ){
@@ -1146,7 +1111,7 @@ $('.btnImprimirTicket').click(function () {
 		case '28':
 			queTitulo='      * Registro de Producto *\nGracias por registrar su producto';
 			queMonto= $('#spanPresInicial').text(); 
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1165,7 +1130,7 @@ $('.btnImprimirTicket').click(function () {
 			queTitulo='       * Retiro de artículo *'; break;
 		case '9':
 			queTitulo='       * Pago Parcial de Interés *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1177,7 +1142,7 @@ $('.btnImprimirTicket').click(function () {
 		case '10':
 		case '44':
 			queTitulo='       * Cancelación de Interés *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1188,7 +1153,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '21':
 			queTitulo='       * Venta de producto *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketVenta.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketVenta.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1199,7 +1164,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '45':
 			queTitulo='     * Amotización al préstamo *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1210,7 +1175,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '32':
 			queTitulo='       * Fin de préstamo *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1221,7 +1186,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '33':
 			queTitulo='       * Pago parcial *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketv3.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1232,7 +1197,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '36':
 			queTitulo='      * Gastos Adminitrativos *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketGastos.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketGastos.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1242,7 +1207,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '38':
 			queTitulo='      * Compra *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketCompra.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketCompra.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),
@@ -1251,7 +1216,7 @@ $('.btnImprimirTicket').click(function () {
 			}}).done(function (resp) { 	}); break;
 		case '76':
 			queTitulo='      * Pago de cochera *';
-			$.ajax({url: 'http://127.0.0.1/perucash/printTicketGastos.php', type: 'POST', data: {
+			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketGastos.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
 				titulo: queTitulo,
 				fecha: queFecha.replace('a las ', ''),

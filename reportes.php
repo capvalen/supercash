@@ -6,7 +6,7 @@ require("php/conkarl.php");
 
 
 <head>
-	<title>Reporte: PeruCash</title>
+	<title>Reporte: SuperCash</title>
 	<?php include "header.php"; ?>		
 </head>
 

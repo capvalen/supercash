@@ -4,7 +4,7 @@ include 'php/conkarl.php'; ?>
 <html lang="es">
 
 <head>
-	<title>Configuraciones: PeruCash</title>
+	<title>Configuraciones: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 

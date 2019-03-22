@@ -3,7 +3,7 @@
 <html lang="es">
 
 <head>
-	<title>Registro: PeruCash</title>
+	<title>Registro: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 

@@ -6,7 +6,7 @@ include 'php/variablesGlobales.php';
 <html lang="es">
 
 <head>
-	<title>Verificación: PeruCash</title>
+	<title>Verificación: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 

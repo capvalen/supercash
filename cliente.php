@@ -11,7 +11,7 @@ if( isset($_GET['idCliente'])){
 }
 ?>
 <head>
-	<title>Cliente: PeruCash</title>
+	<title>Cliente: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 

@@ -3,7 +3,7 @@
 <html lang="es">
 
 <head>
-	<title>Registro: PeruCash</title>
+	<title>Registro: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -28,7 +28,7 @@
 			<!-- Empieza a meter contenido 2 -->
 			<h2 class="purple-text text-lighten-1">Cochera <small><?php print $_COOKIE["ckAtiende"]; ?></small></h2><hr>
 			<div class="contenedorBienvenida">
-				<h5>Bienvenido a la cochera de PeruCash, para empezar selecciona que tipo de proceso deseas realizar</h5>
+				<h5>Bienvenido a la cochera de SuperCash, para empezar selecciona que tipo de proceso deseas realizar</h5>
 				<div class="row"><br>
 					<div class="col-sm-6 text-center">
 						<button class="btn btn-morado btn-outline btnMasterEntrada" id="btnRemateMaster"><i class="icofont icofont-truck-alt"></i> <br>Ingreso</button>

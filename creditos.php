@@ -17,7 +17,7 @@ if ( isset($_GET['credito'])){
 <html lang="es">
 
 <head>
-	<title>Créditos: PeruCash</title>
+	<title>Créditos: SuperCash</title>
 	<?php include "header.php"; ?>
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css?ver=1.0.2">
 </head>

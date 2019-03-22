@@ -8,7 +8,7 @@ if (!isset($_GET['fecha'])) { //si existe lista fecha requerida
 <html lang="es">
 
 <head>
-	<title>Caja: PeruCash</title>
+	<title>Caja: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -375,7 +375,7 @@ $('#dtpFechaIniciov3').val('<?php
 		}
 		?>');
 moment.locale('es');
-<? if(isset($_GET[cuadre])){ ?>
+<? if(isset($_GET['cuadre'])){ ?>
 calculoTicketVirtual();
 
 function calculoTicketVirtual() {
@@ -548,7 +548,7 @@ $('#btnGuardarCierre').click(function () {
 	}
 });
 $('.modal-GuardadoCorrecto').on('click', '#btnPrintTCierre', function (e) {
-	$.ajax({url: 'http://127.0.0.1/perucash/printTicketCierre.php', type: 'POST', data: {
+	$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketCierre.php', type: 'POST', data: {
 		apertura: $('#spanApertura').text(),
 		cierre: $('#txtMontoCierre').val(),
 		efectivoEntrada: $('#spanResultadoFinal').attr('sumaEfectivo'),

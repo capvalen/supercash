@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-	<title>Créditos: PeruCash</title>
+	<title>Créditos: SuperCash</title>
 	<?php include "header.php"; ?>
 </head>
 
@@ -25,11 +25,11 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-4 col-lg-3 container-fluid">
 					<h4>Mis datos:</h4>
-				<? $imagen = '../app/images/usuarios/'.$_COOKIE['ckidUsuario'].'.jpg';
+				<? $imagen = 'images/usuarios/'.$_COOKIE['ckidUsuario'].'.jpg';
 					if( file_exists($imagen) ):?>
 					<img src="<?= $imagen; ?>" class="img-responsive img-circle" style=" display: inline-block; padding: 0 40px;">
 				<? else: ?>
-					<img src="https://perucash.com/app/images/usuarios/noimg.svg?ver=1.1" class="img-responsive img-circle" style=" display: inline-block; padding: 0 40px;">
+					<img src="images/usuarios/noimg.jpg?ver=1.2" class="img-responsive img-circle" style=" display: inline-block; padding: 0 40px;">
 				<? endif;?>
 				<br>
                <label for="">Mi nombre</label> <input type="text" id="txtNombre" class="form-control text-center" readonly value="<?= $_COOKIE['cknomCompleto'];?>">
