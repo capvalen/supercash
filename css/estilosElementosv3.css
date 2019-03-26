@@ -377,3 +377,10 @@ input{ cursor: url("../images/curs85617.png") 2 2, text;  } */
     text-align: left;
     vertical-align: middle;
   }
+
+#rowProductoEncontrado .badge{
+    background-color: #6c5bbb;
+}
+#rowProductoEncontrado li a {
+    color: #ab47bc;
+}

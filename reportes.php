@@ -69,7 +69,7 @@ require("php/conkarl.php");
 							<option value="3">Préstamos finalizados</option>
 							<option value="1">Préstamos y Desembolsos</option>
 							<option value="6">Rematados</option>
-							<option value="14">Reporte mayor</option>
+							
 							<option value="8">Retiro por socios</option>
 							<option value="5">Vendidos</option>
 						</select>

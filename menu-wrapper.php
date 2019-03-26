@@ -17,9 +17,7 @@ $nomArchivo = basename($_SERVER['PHP_SELF']); ?>
 		<li <?php if($nomArchivo =='caja.php') echo 'class="active"'; ?>>
 				<a href="caja.php"><i class="icofont icofont-shopping-cart"></i> Caja</a>
 		</li>
-		<li <?php if($nomArchivo =='creditos.php') echo 'class="active"'; ?>>
-				<a href="creditos.php"><i class="icofont icofont-paper"></i> Créditos</a>
-		</li>
+	
 		
 		<li <?php if($nomArchivo =='reportes.php') echo 'class="active"'; ?>>
 				<a href="reportes.php"><i class="icofont icofont-ui-copy"></i> Reportes</a>

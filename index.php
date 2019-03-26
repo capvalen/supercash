@@ -27,7 +27,7 @@ body{
 
 body{
 	background-color: #39bcf0;
-	background: url('images/shutterstock_360655751.jpg?v=0.1');
+	background: url('images/Lakeside_Camping.jpg?v=0.1');
 	/*background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;*/

@@ -345,63 +345,42 @@ $cochera=0;
 							$sqlIntereses = $conection->query($sqlBaseInteres);
 							$rowInteres = $sqlIntereses->fetch_assoc();
 							$gastosAdmin=0;
+							$semanas = ceil($rowInteres['diferenciaDias']/7);
 							?>
 						<ul>
 							<li>Capital: S/. <span id="spanCapitalDefault"><?php echo $rowInteres['preCapital'];?></span> <?php if( in_array($_COOKIE['ckPower'], $soloDios) ): ?> <button class="btn btn-morado btn-outline btn-sinBorde btn-xs" id="btnChangeCapital"><i class="icofont icofont-bag-alt"></i> Cambiar capital</button> <? endif;?> </li>
 						
 						
-							<li>Tiempo de interés: <span><?php  if($rowInteres['diferenciaDias']=='0'){echo '1 día.';} else if($rowInteres['diferenciaDias']=='1'){echo '1 día.';}else{ echo  $rowInteres['diferenciaDias'].' días';} if($rowInteres['diferenciaDias']=='0'){$rowInteres['diferenciaDias']+=1;} ?> </span> <? if($rowProducto['presFechaCongelacion']<>''): echo '<strong>(Congelado)</strong>'; endif; if( in_array($_COOKIE['ckPower'], $soloDios)){?> <button class="btn btn-morado btn-outline btn-sinBorde btn-xs" id="btnChangeFechaInt"><i class="icofont icofont-paper"></i> Cambiar fecha interés</button> <? } ?></li>
-						<?php
+							<li>Tiempo de interés: <span><?php 
+							if($semanas=='0'){echo '1 semana'; $semanas+=1;} else if($semanas=='1'){echo '1 semana'. '('. $rowInteres['diferenciaDias'] .' días)';}
+							else{ echo  $semanas.' semanas ('. intval($rowInteres['diferenciaDias']/7) .' semanas y '. $rowInteres['diferenciaDias']%7 .' días)';} ?> </span>
+							<? if($rowProducto['presFechaCongelacion']<>''): echo '<strong>(Congelado)</strong>'; endif; if( in_array($_COOKIE['ckPower'], $soloDios)){?> <button class="btn btn-morado btn-outline btn-sinBorde btn-xs" id="btnChangeFechaInt"><i class="icofont icofont-paper"></i> Cambiar fecha interés</button> <? } ?></li>
 						
-						if($rowInteres['diferenciaDias']>=1 && $rowInteres['diferenciaDias']<=7 ){ ?>
-							<li>Interés: <span><?php echo $rowInteres['preInteres']; ?>% = S/. <?php $interesJson= number_format(round($rowInteres['preCapital']*$rowInteres['preInteres']/100,1,PHP_ROUND_HALF_UP),2); echo $interesJson; ?></span></li>
-							<li>Razón del cálculo: <span><strong>Interés simple</strong> (del día 1 al 7)</span></li>
-						<?php }else if( $rowInteres['diferenciaDias']>=8 && $rowInteres['diferenciaDias']<=35 ){ 
-								$interesDiario= ($rowInteres['preInteres']/100)/7; ?>
-							<li>Interés: <span><?php echo $rowInteres['preInteres']; ?>% semanal = S/. <?php $interesJson= number_format(round($rowInteres['preCapital']*$interesDiario*$rowInteres['diferenciaDias'],1,PHP_ROUND_HALF_UP),2); echo $interesJson.' ('.number_format($interesDiario*$rowInteres['diferenciaDias']*100,2).'%)'; ?></span></li>
-							<li>Razón del cálculo: <span><strong>Interés Diario</strong> (del día 8 al 35)</span></li>
-						<?php }else {
-							$_GET['inicio']=floatval($rowInteres['preCapital']);
+						<?php $interesDiario= $rowInteres['preInteres']/100; ?>
+							<li>Interés: <span><?php echo $rowInteres['preInteres']; ?>% semanal = S/ <?php $interesJson= number_format(round($rowInteres['preCapital']*$interesDiario*$semanas,1,PHP_ROUND_HALF_UP),2); echo $interesJson.' ('.number_format($interesDiario*$semanas*100,2).'%)'; ?></span></li>
+							<?php
+						if($rowInteres['diferenciaDias']>=0 && $rowInteres['diferenciaDias']<=35 ){
 
-							if($rowInteres['diferenciaDias']<=200){
-								$_GET['numhoy']=$rowInteres['diferenciaDias'];
-							}else{
-								$_GET['numhoy']=200;
-							}
-							$_GET['interes']=$rowInteres['preInteres'];
-							//$resultado=(require_once "php/calculoInteresAcumuladoDeValorv3.php");
-							// var_dump($resultado);
-							//$interesJson= $resultado[0]['soloInteres'];
-							//$razonInteres= $resultado[0]['intDiarioHoy']*100;
-							$razonInteres= $rowInteres['diferenciaDias']*($rowInteres['preInteres']/7);
-							$interesJson= round(($rowInteres['preCapital']*$razonInteres)/100,1,PHP_ROUND_HALF_UP );
-							?>
-							<li>Interés <strong>simple</strong>: <span><?php echo $rowInteres['preInteres']; ?>% = S/. <?php  echo number_format($interesJson,2).' ('.number_format($razonInteres,2).'%)'; ?></span></li>
-							<li>Razón del cálculo: <span><strong>Interés simple diario</strong> (más de 29 días).</span></li>
-						<?php if($rowInteres['diferenciaDias']>=36 ){
-							if ($rowInteres['preCapital']<=200) { $gastosAdmin=5; }
-							else if ($rowInteres['preCapital']>200 && $rowInteres['preCapital']<=1000) { $gastosAdmin=10; }
-							else if ($rowInteres['preCapital']>1001 && $rowInteres['preCapital']<=3000) { $gastosAdmin=20; }
-							else if ($rowInteres['preCapital']>3000 ) { $gastosAdmin=30; }
+						 }else {
+							 if($rowInteres['diferenciaDias']>=32 ){
+								if ($rowInteres['preCapital']<=200) { $gastosAdmin=5; }
+								else if ($rowInteres['preCapital']>200 && $rowInteres['preCapital']<=1000) { $gastosAdmin=10; }
+								else if ($rowInteres['preCapital']>1001 && $rowInteres['preCapital']<=3000) { $gastosAdmin=20; }
+								else if ($rowInteres['preCapital']>3000 ) { $gastosAdmin=30; }
 						?>
 							<li>Gastos admnistrativos: <span>S/ <?= number_format($gastosAdmin,2); ?></span></li>
 						<?php }
 						} //fin de else antes de $_GET['inicio']
-						if($rowProducto['idTipoProducto']=="1" ):
+						if($rowProducto['idTipoProducto']=="1" || $rowProducto['idTipoProducto']=="11" ):
 							$cochera=2*$rowInteres['diferenciaDias'];
-							echo "<li>Cochera: <span>S/. ". number_format($cochera,2) ."</span> (S/ 2.00 por día)</li>";
-						endif;
-						if( $rowProducto['idTipoProducto']=="11" ):
-							$cochera=2*$rowInteres['diferenciaDias'];
-							echo "<li>Cochera: <span>S/. ". number_format($cochera,2) ."</span> (S/ 2.00 por día)</li>";
+							echo "<li>Cochera Carros: <span>S/. ". number_format($cochera,2) ."</span> (S/ 2.00 por día)</li>";
 						endif;
 						if( $rowProducto['idTipoProducto']=="42" ):
 							$cochera=1*$rowInteres['diferenciaDias'];
-							echo "<li>Cochera: <span>S/. ". number_format($cochera,2) ."</span> (S/ 1.00 por día)</li>";
+							echo "<li>Cochera Motos: <span>S/. ". number_format($cochera,2) ."</span> (S/ 1.00 por día)</li>";
 						endif; //fin de 
 						?>
 							<li>Deuda total para hoy: <span><strong>S/. <?php echo number_format($interesJson+$rowInteres['preCapital']+$gastosAdmin+$cochera,2);  ?></strong></span></li>
-							
 						</ul>
 						<?php 
 					
@@ -1278,6 +1257,8 @@ $('#btnInventariarNegativo').click(function () {
 });
 $('.modal-pagoMaestro').on('shown.bs.modal', function () {
 	$('#dtpFechaPago').val( moment().format('DD/MM/YYYY h:mm a') );
+	$('#sltMetodopago').selectpicker('val', 'Efectivo');
+	$('#txtMontoPagos').val('0.00');
 });
 $('#btnInsertPositivo').click(function () {
 	$.ajax({
@@ -1463,6 +1444,9 @@ $('#btnInsertPagoMaestro').click(function() {
 	if(idMoneda == null ){
 		pantallaOver(false);
 		$('.modal-pagoMaestro .divError').removeClass('hidden').find('.spanError').text('Debes seleccionar un método de pago primero');
+	}else if( $('#txtMontoPagos').val()==0 ){
+		pantallaOver(false);
+		$('.modal-pagoMaestro .divError').removeClass('hidden').find('.spanError').text('Los pagos deben ser mayor a cero');
 	}else{ 
 		$.ajax({url: 'php/ingresarPagoMaestro.php', type: 'POST', data: {
 			idProd: <?php echo $_GET['idProducto']; ?>,

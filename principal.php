@@ -77,7 +77,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 	<div class="container-fluid contenedorDeslizable">
 		<div class="container-fluid  ">
 		<!-- Empieza a meter contenido principal dentro de estas etiquetas -->
-			
+		<h4 class="text-muted">Resumen del día</h4>
 			<div class="row" id="rowConPeques">
 				<div class="col-xs-6 col-sm-4" ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
@@ -179,11 +179,6 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 					</div>
 				</div></div>
 			</div>
-			<div class="tarjeta">
-				<div class="col-xs-12 col-md-6  tarjeta"><h3>Record 15 productos</h3>
-					<canvas id="myChart" width="400" height="400"></canvas>
-				</div>
-			</div>
 			
 		<!-- Fin de contenido principal -->
 		</div> <!-- col-lg-12 contenedorDeslizable -->
@@ -206,90 +201,12 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 datosUsuario();
 
 
-<?php 
-$sqlCh = "SELECT count(p.idTipoProducto) as conteo, tp.tipopDescripcion FROM `producto` p
-inner join tipoProducto tp on p.idTipoProducto = tp.idTipoProducto
-where date_format(curdate(), '%Y-%m') = date_format(p.prodFechaRegistro, '%Y-%m')
-group by p.idTipoProducto
-order by conteo asc
-limit 15;";
 
-$llamadoCh = $cadena->query($sqlCh);
-
-
-
-// liberar el conjunto de resultados
-//$llamadoCh->close();
-?>
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip(); 
 });
 
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-		  labels: [<?
-			while ($resultadoCh = $llamadoCh->fetch_assoc()){ ?>
-				"<?= $resultadoCh['tipopDescripcion']; ?>"<? echo ',';
-			} ?>],
-        datasets: [{
-            label: 'Cantidad de préstamos',
-            data: [<?
-				$llamadoCh->data_seek(0); 
-				while ($resultadoCh = $llamadoCh->fetch_assoc()){ ?>
-					"<?= $resultadoCh['conteo']; ?>"<? echo ',';
-				} ?>],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
-                'rgba(255, 159, 64, 0.6)',
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.6)',
-                'rgba(153, 102, 255, 0.6)',
-                'rgba(255, 159, 64, 0.6)',
-					 'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)',
-					 
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-					 'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(75, 192, 192, 1)',
-            ],
-            borderWidth: 0.5
-        }]
-    },
-   options: {
-		scales: {
-      	yAxes: [{
-				ticks: {
-					beginAtZero:true,
-					display: false
-				}
-			}]
-		}
-   },
-	pieceLabel: { mode: 'percentage', precision: 2 } 
-});
+
 </script>
 <?php } ?>
 </body>
