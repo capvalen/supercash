@@ -13,7 +13,7 @@ if( isset($_GET['idProducto'])){
 	$esCompra=$resCompra[0];
 
 	if($esCompra =='0'){
-		$sql = mysqli_query($conection,"select p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion, tp.idTipoProceso
+		$sql = mysqli_query($conection,"SELECT p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion, tp.idTipoProceso
 		FROM producto p inner join Cliente c on c.idCliente=p.idCliente inner join prestamo_producto pre on pre.idProducto=p.idProducto inner join tipoProceso tp on tp.idTipoProceso=pre.presidTipoProceso
 		left join prestamo pe on pe.idPrestamo = pre.idPrestamo
 		inner join usuario u on u.idUsuario=p.idUsuario
@@ -190,7 +190,7 @@ $cochera=0;
 					}else{echo '<li><a href="images/imgBlanca.png" data-lightbox="image-1"><img src="images/imgBlanca.png" class="img-responsive" ></a></li>';} ?>
 				</div>
 				<div class="col-xs-12 col-sm-5 divDatosProducto">
-					<h2 class="mayuscula purple-text text-lighten-1"><span id="spanClase"><?= $rowProducto['tipopDescripcion']; ?></span>: <span class="h2Producto"><?php echo  $rowProducto['prodNombre']; ?></span> <span class="badge"><?php echo $rowProducto['tipoDescripcion'] ?></span> </h2>
+					<h2 class="mayuscula purple-text text-lighten-1"> <span class="h2Producto"><?php echo  $rowProducto['prodNombre']; ?></span> <span class="badge"><?php echo $rowProducto['tipoDescripcion'] ?></span> </h2>
 					<h4 class="purple-text text-lighten-1">Código de producto: #<span><?php echo $rowProducto['idProducto']; ?></span></h4>
 							
 					<p class="mayuscula <?php if($esCompra=='1'){ echo "hidden";}?>">Dueño: <span class="hidden" id="spanIdDueno"><? if($esCompra =='1'){echo '00000000';}else{echo $rowProducto['cliDni'];} ?></span>
@@ -357,7 +357,7 @@ $cochera=0;
 							<? if($rowProducto['presFechaCongelacion']<>''): echo '<strong>(Congelado)</strong>'; endif; if( in_array($_COOKIE['ckPower'], $soloDios)){?> <button class="btn btn-morado btn-outline btn-sinBorde btn-xs" id="btnChangeFechaInt"><i class="icofont icofont-paper"></i> Cambiar fecha interés</button> <? } ?></li>
 						
 						<?php $interesDiario= $rowInteres['preInteres']/100; ?>
-							<li>Interés: <span><?php echo $rowInteres['preInteres']; ?>% semanal = S/ <?php $interesJson= number_format(round($rowInteres['preCapital']*$interesDiario*$semanas,1,PHP_ROUND_HALF_UP),2); echo $interesJson.' ('.number_format($interesDiario*$semanas*100,2).'%)'; ?></span></li>
+							<li>Interés: <span><?php echo $rowInteres['preInteres']; ?>% semanal = S/ <?php $interesJson= round(floatval($rowInteres['preCapital']*$interesDiario*$semanas),1,PHP_ROUND_HALF_UP); echo number_format($interesJson,2).' ('.number_format($interesDiario*$semanas*100,2).'%)'; ?></span></li>
 							<?php
 						if($rowInteres['diferenciaDias']>=0 && $rowInteres['diferenciaDias']<=35 ){
 
