@@ -493,7 +493,7 @@ $('#btnCajaAbrir').click(function () {
 });
 $('#btnGuardarApertura').click(function () {
 	pantallaOver(true);
-	var monto = parseFloat($('#txtMontoApertura').attr('data-val'));
+	var monto = parseFloat($('#txtMontoApertura').val());//.attr('data-val')
 	var obs = $('#txtObsApertura').val();
 
 	if( $('#txtMontoApertura').val() == '' || monto <0){
