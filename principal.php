@@ -69,10 +69,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 		<div class="col-xs-7">
 			<h3 class="purple-text text-lighten-1">Panel de administración</h3>
 		</div>
-		<div class="col-xs-5">
-			<div class="col-xs-6" id="divMontoMes" data-toggle="tooltip" title="Suma de Recuperación - Inversión"><p>Éste mes</p><h4 id="montoMes">S/. <?php include 'php/recuperacionEsteMes.php'; ?></h4> <h4><i class="icofont icofont-chart-histogram-alt"></i></h4> </div>
-			<div class="col-xs-6" id="divMontoMesAnt" data-toggle="tooltip" title="Suma de Recuperación - Inversión"><p>Anterior mes</p><h4 id="montoMesAnt">S/. <?php include 'php/recuperacionAnteriorMes.php'; ?></h4> <h4><i class="icofont icofont-chart-histogram-alt"></i></h4> </div>
-		</div>
+		
 	</div>
 	<div class="container-fluid contenedorDeslizable">
 		<div class="container-fluid  ">
@@ -101,7 +98,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 							</div>
 						</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4"  ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden"  ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-primary">
 							<i class="icofont icofont-money"></i> 
@@ -112,7 +109,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 						</div>
 					</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4"  ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden"  ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-primary">
 							<i class="icofont icofont-money"></i> 
@@ -123,7 +120,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 						</div>
 					</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4" ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden" ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-primary">
 							<i class="icofont icofont-money"></i> 
@@ -134,7 +131,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 						</div>
 					</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4" ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden" ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-primary">
 							<i class="icofont icofont-money"></i> 
@@ -145,7 +142,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 						</div>
 					</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4" ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden" ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-warning">
 							<i class="icofont icofont-card"></i> 
@@ -167,7 +164,7 @@ label{color: #99abb4;font-weight: 500;font-size: 14px;}
 						</div>
 					</div>
 				</div></div>
-				<div class="col-xs-6 col-sm-4" ><div class="rowBlanco cuadroPeque">
+				<div class="col-xs-6 col-sm-4 hidden" ><div class="rowBlanco cuadroPeque">
 					<div class="container-fluid">
 						<div class="col-xs-3 divIcono round round-danger">
 							<i class="icofont icofont-ui-rate-remove"></i> 
