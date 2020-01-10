@@ -13,7 +13,7 @@ if( isset($_GET['idProducto'])){
 	$esCompra=$resCompra[0];
 
 	if($esCompra =='0'){
-		$sql = mysqli_query($conection,"SELECT p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion, tp.idTipoProceso
+		$sql = mysqli_query($conection,"select p.*, concat (c.cliApellidos, ' ' , c.cliNombres) as cliNombres, tp.tipoDescripcion, tp.tipColorMaterial, prodActivo, esCompra, u.usuNombres, pre.desFechaContarInteres, c.cliDni, tpr.tipopDescripcion, pe.presFechaCongelacion, tp.idTipoProceso
 		FROM producto p inner join Cliente c on c.idCliente=p.idCliente inner join prestamo_producto pre on pre.idProducto=p.idProducto inner join tipoProceso tp on tp.idTipoProceso=pre.presidTipoProceso
 		left join prestamo pe on pe.idPrestamo = pre.idPrestamo
 		inner join usuario u on u.idUsuario=p.idUsuario
@@ -1088,7 +1088,7 @@ $('.btnImprimirTicket').click(function () {
 	switch( $(this).attr('data-boton') ){
 		case '0':
 		case '28':
-			queTitulo='      * Registro de Producto *\nGracias por registrar su producto';
+			queTitulo='      * Registro de Producto *\n';
 			queMonto= $('#spanPresInicial').text(); 
 			$.ajax({url: 'http://127.0.0.1/SuperCash/printTicketv3.php', type: 'POST', data: {
 				codigo: "<?php echo $_GET['idProducto']; ?>",
