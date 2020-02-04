@@ -18,29 +18,29 @@ use Mike42\Escpos\EscposImage; //librería de imagen
     //$connector = new WindowsPrintConnector("smb://192.168.1.131/TM-U220");
 $connectorV31 = new WindowsPrintConnector("smb://127.0.0.1/TM-U220");
 try {
-	
 	$tux = EscposImage::load("empresa.jpg", false);
-    
+	
     // A FilePrintConnector will also work, but on non-Windows systems, writes
     // to an actual file called 'LPT1' rather than giving a useful error.
     // $connector = new FilePrintConnector("LPT1");
     /* Print a "Hello world" receipt" */
     $printer = new Printer($connectorV31);
-	$printer -> bitImage($tux);
-    
+	$printer -> bitImage($tux);    
  
     $printer -> setEmphasis(true);    
-    $printer -> text("{$_POST['titulo']}\n");
+    $printer -> text("\n{$_POST['titulo']}\n");
     $printer -> setEmphasis(false);
-    $printer -> text("{$_POST['fecha']}\n\n");
-    $printer -> text("Código: ".ucwords($_POST['codigo'])."\n");
+    $printer -> text( str_replace('p.m.','pm',str_replace('a.m.','am',str_replace(',', '',$_POST['fecha']))). "\n\n");
+	$printer -> setTextSize(4, 4);
+    $printer -> text("#".$_POST['codigo']."\n");
+	$printer -> setTextSize(1, 1);
     $printer -> text("Cliente: ".ucwords($_POST['cliente'])."\n");
     $printer -> text("Artículo: ".ucwords($_POST['articulo'])."\n");
     $printer -> text("Monto: S/. {$_POST['monto']}\n");
     //$printer -> text("Fecha límite Sábado, 4 Enero 2017. Posterior a ésta fecha el monto incrementará.\n");
     $printer -> text("Usuario: {$_POST['usuario']}\n");
     $printer -> text("-----------------------------\n");
-    $printer -> text("Whatsapp: 979 889008\n");
+    $printer -> text("Whatsapp: 979889008/ 980096642\n");
     $printer -> text("-----------------------------\n");
     $printer -> text("   Facebook/SupercashHuancayo\n");
     $printer -> text("         Vuelva Pronto\n\n\n\n");
