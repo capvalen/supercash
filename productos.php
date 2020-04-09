@@ -161,10 +161,10 @@ $cochera=0;
 					  <ul class="dropdown-menu">
 						<li><a href="#!" id="liAGestionrFotos"><i class="icofont icofont-shopping-cart"></i> Gestionar fotos</a></li>
 						<li><a href="#!" id="liHojaControl"><i class="icofont icofont-print"></i> Hoja de control</a></li>
+						<? if( $_COOKIE['ckPower']==='1' ): ?>
 						<li><a href="#!" id="liEditDescription"><i class="icofont icofont-exchange"></i> Edición de descripción</a></li>
-						<? if( $_COOKIE['ckPower']==='1' )?>
 						<li><a href="#!" id="liCongelar"><i class="icofont icofont-ice-cream"></i> Congelar crédito</a></li>
-						<? ?>
+						<? endif; ?>
 					  </ul>
 					</div>
 				</div>
@@ -683,14 +683,14 @@ $cochera=0;
 			</div>
 			<div class="modal-body">
 				<div class="container-fluid">
-					<p>Rellene cuidadosamente la siguiente información</p>
+					<p>Rellene cuidadosamente la siguiente información:</p>
 					<label for="">Tipo de pago</label>
 					<div id="cmbEstadoPagos">
 					<select class="selectpicker mayuscula" title="Tipos de pago..."  data-width="100%" data-live-search="true" data-size="15">
 						<?php require 'php/detallePagosOPTv3.php'; ?>
 					</select></div>
-					<label for="">Fecha de pago</label>
-					<input id="dtpFechaPago" type="text" class="form-control input-lg text-center" autocomplete="off">
+					<label class="hidden" for="">Fecha de pago</label>
+					<input id="dtpFechaPago" type="text" class="form-control input-lg text-center hidden" autocomplete="off">
 					<label for="">Método de pago</label>
 					<div id="divCmbMetodoPago">
 						<select class="form-control selectpicker" id="sltMetodopago" title="Métodos..."  data-width="100%" data-live-search="true" data-size="15">
@@ -1361,6 +1361,7 @@ $('#btnCrearTicketPagoInteres').click(function () {
 		$('#spanInteresTipo').html('Debe pagar como mínimo los Gastos Administrativos');
 	}
 });
+<? if( $_COOKIE['ckPower']=='1' ):?>
 $('#liEditDescription').click(function() {
 	$('#txtModProdNombre').val( $('.h2Producto').text() );
 	$('#txtModPresCantidad').val(parseInt($('#spanCantp').text()));
@@ -1370,7 +1371,6 @@ $('#liEditDescription').click(function() {
 	$('#sltEstadoMod').val(<?= $rowProducto['prodActivo']; ?>);
 	$('.modalEditarProducto').modal('show');
 });
-<? if( $_COOKIE['ckPower']=='1' ):?>
 $('#liCongelar').click(function() {
 	$('.modalCongelarProducto').modal('show');
 });
@@ -1463,6 +1463,11 @@ $('#btnInsertPagoMaestro').click(function() {
 				$('.modal-GuardadoCorrecto #spanBien').text('Pago insertado');
 				$('.modal-GuardadoCorrecto').modal('show');
 			}
+
+			$('.modal-GuardadoCorrecto').on('hidden.bs.modal', function () { 
+				location.reload();
+			});
+
 		});
 	}
 });

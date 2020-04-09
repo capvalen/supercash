@@ -68,6 +68,7 @@ require("php/conkarl.php");
 							<option value="13">Pagos de servicios</option>
 							<option value="3">Préstamos finalizados</option>
 							<option value="1">Préstamos y Desembolsos</option>
+							<option value="15">Todos los productos</option>
 							<option value="6">Rematados</option>
 							
 							<option value="8">Retiro por socios</option>
@@ -489,6 +490,7 @@ $('#btnFiltroAnaticica').click(()=> {
 		$('tbody').children().remove();
 		$('tfoot').children().remove();
 		$('#tdFechaUltPago').addClass('hidden');
+		$('#tdEstado').remove(); $('#tdCierre').remove();
 		$('.divInternosReportes').removeClass('hidden');
 		switch ($('#sltFiltroAnalitica').val()) {
 			case '1':
@@ -882,18 +884,56 @@ $('#btnFiltroAnaticica').click(()=> {
 			case '14': 
 				$('.divInternosReportes').removeClass('hidden');
 			break;
+			case '15':
+				$('#dtpFechaIniciov3').parent().addClass('hidden');
+				$('#tablita thead tr').append('<th id="tdCierre" data-sort="string">Cierre</th><th id="tdEstado" data-sort="string">Estado</th>');
+				$('#tdUltPago').text('Iniciado'); let estado ='';
+				$.ajax({url: 'php/reporteProductosTodos.php', type: 'POST', data: { fecha: $('#dtpFechaIniciov3').val() }}).done((resp)=> { //console.log(resp)
+					var data = JSON.parse(resp);
+					if(resp=='[]'){
+						$('tbody').append(`
+						<tr>
+							<td class="mayuscula">No existen artículos en ésta categoría o intervalo de fechas</td>
+							<td class="mayuscula"></td>
+							<td></td>
+						</tr>`);
+					}
+					$.each(data, function (i, dato) {
+						sumaElementos+=parseFloat(dato.prodMontoEntregado);
+						if( dato.prodActivo==0 ){ estado = 'Finalizado'; }else{ estado = 'Activo'; }
+						$('tbody').append(`
+						<tr><td>${dato.idProducto}</td><td></td>
+							<td class="mayuscula"><a href="productos.php?idProducto=${dato.idProducto}">${dato.prodNombre}</a></td>
+							<td class="mayuscula"><a href="cliente.php?idCliente=${dato.idCliente}">${dato.cliNombres}</a></td>
+							<td data-sort-value="${moment(dato.prodFechaInicial).format('X')}">${moment(dato.prodFechaInicial).format('DD/MM/YYYY')}</td>
+							<td>${parseFloat(dato.cierre).toFixed(2)}</td>
+							<td>${parseFloat(dato.prodMontoEntregado).toFixed(2)}</td>
+							<td>${estado}</td>
+						</tr>`);
+						
+						if(data.length==i+1){
+							$('#tablita').append(`<tfoot><th><td></td><td></td><td></td>
+								<td><strong>Total: </strong></td>
+								<td>S/ ${parseFloat(sumaElementos).toFixed(2)}</td>
+								</th></tfoot>`);
+						}
+					});
+				}); break;
 			default:
 				break;
 		}
 	}
 });
 $('#sltFiltroAnalitica').click(function() {
-	if( $('#sltFiltroAnalitica').val()=='14' ){
+	if( $('#sltFiltroAnalitica').val()=='14'  ){
 		$('.divInternosReportes').addClass('hidden');
 		$('.tablaResultados').addClass('hidden');
 		$('#divReporteMayor').removeClass('hidden');
 		$('#tablasReporteMayor').removeClass('hidden');
-	}else{
+	}else if( $('#sltFiltroAnalitica').val()=='15' ){
+		$('#dtpFechaIniciov3').parent().addClass('hidden');
+	}
+	else{
 		$('.divInternosReportes').removeClass('hidden');
 		$('.tablaResultados').removeClass('hidden');
 		$('#divReporteMayor').addClass('hidden');
